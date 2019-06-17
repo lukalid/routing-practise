@@ -11,22 +11,8 @@ import { EditServerComponent } from './servers/edit-server/edit-server.component
 import { ServerComponent } from './servers/server/server.component';
 import { ServersService } from './servers/servers.service';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-
-const appRoutes: Routes = [
-  { path: '', component: HomeComponent }, // localhost:4200
-  { path: 'users', component: UsersComponent, children: [
-      { path: ':id/:name', component: UserComponent }, // localhost:4200/users/:id/:name
-    ] }, // localhost:4200/users
-  { path: 'servers', component: ServersComponent, children: [
-      { path: ':id', component: ServerComponent, children: [
-          { path: 'edit', component: EditServerComponent } // localhost:4200/servers/:id/edit
-        ] }, // localhost:4200/servers/:id
-    ] }, // localhost:4200/servers
-  { path: 'not-found', component: PageNotFoundComponent },
-  { path: '**', redirectTo: '/not-found' } // this has to be the last one
-];
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +29,7 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    AppRoutingModule
   ],
   providers: [ServersService],
   bootstrap: [AppComponent]
